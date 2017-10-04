@@ -1,0 +1,150 @@
+body {
+    padding: 100px;
+}
+
+/* style for heart */
+.heart, .heart::before, .heart::after {
+    width: 100px;
+    height: 100px;
+    background: #C50A23;
+}
+
+.heart {
+    position: relative;
+    transform: rotate(45deg);
+}
+
+.heart::before, .heart::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+}
+
+.heart::after {
+    top: -55px;
+}
+
+.heart::before {
+    left: -55px;
+}
+
+
+/* style for diamond */
+.diamond {
+    margin-top: 100px;
+
+    transform: rotate(45deg);
+    width: 130px;
+    height: 130px;
+    background: #C50A23;
+}
+
+/* style for spade */
+.spade.heart {
+    margin: 100px 0;
+
+    transform: rotate(225deg);
+}
+
+.tale {
+    width: 0; 
+    height: 0; 
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 60px solid #C50A23;
+    transform: rotate(-45deg);
+    position: absolute;
+    top: -45px;
+    right: 95px;
+}
+
+
+/* style for clover */
+.clover {
+    margin: 200px 0;
+    position: relative;
+}
+
+
+.clover, .clover::after, .clover::before {
+    width: 100px;
+    height: 85px;
+    border-radius: 100px/85px;
+    background: #C50A23
+}
+
+.clover::after, .clover::before {
+    position: absolute;
+    content: '';
+    bottom: -65px;
+}
+
+.clover::after {
+    left: -50px;
+}
+
+.clover .tale {
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 145px solid #C50A23;
+    transform: rotate(180deg);
+    top: 28px;
+    left: 30px;
+}
+
+.clover::before {
+    right: -50px;
+}
+
+
+/* style for checkbox */
+
+.check {
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    position: relative;
+}
+
+input[type="checkbox"] {
+    opacity: 0;
+    margin: 0;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.mark {
+    width: 10px;
+    height: 20px;
+    border-bottom: 5px solid green;
+    border-right: 5px solid green;
+    transform: rotate(45deg);
+    position: absolute;
+    top: 0;
+    left: 8px;
+    visibility: hidden;
+    z-index: 0;
+}
+
+input[type="checkbox"]:checked + .mark {
+    visibility: visible;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
