@@ -1,0 +1,22 @@
+.cilynder {
+    transform-style: preserve-3d;
+    background: lightseagreen;
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+}
+
+.base {
+    width: 100px;
+    height: 100px;
+    background: lightcoral;
+    transform: rotate(40deg);
+}
+
+.edge {
+    width: 0;
+	height: 0;
+	border-left: 50px solid transparent;
+	border-right: 50px solid transparent;
+	border-bottom: 100px solid lightcoral;
+}

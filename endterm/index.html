@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #add_label, #add_options, #btn, #input-type {
+            display: none;
+        }
+
+        #result {
+            margin: 50px;
+            padding: 20px;
+            border: 2px black solid;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        #result label {
+            color: salmon;
+            margin-right: 10px;
+        }
+        #result div {
+            display: flex;
+            align-items: flex-end;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <form onsubmit="return false" novalidate>
+        <label for="adder">Add element to the form</label>
+        <select name="" id="adder" onchange="getVal()" required>
+            <option value="default" selected="selected" disabled>Select one option</option>
+            <option value="radio">Radio buttons</option>
+            <option value="input">Input</option>
+            <option value="dropbox">Dropbox</option>
+            <option value="textarea">Textarea</option>
+            <option value="checkbox">Checkbox</option>
+        </select>
+        <div id="add_label">
+            <label for="lbl">Add label to form element, please: </label>
+            <input type="text" id="lbl" required>
+        </div>
+        <div id="input-type">
+            <select name="" id="types">
+                <option value="text">Text</option>
+                <option value="password">Password</option>
+                <option value="button">Button</option>
+                <option value="number">Number</option>
+            </select>
+        </div>
+        <div id="add_options">
+            <label for="options">Write options, please: </label>
+            <input type="text" name="" id="options" required>
+            <button onclick="addOpt()">Add</button>
+            <div>
+                <span>Added options:</span>
+                <ul id="container"></ul>
+            </div>
+        </div>
+        <button type="submit" id="btn" onclick="addElem()">Add element!</button>
+    </form>
+
+
+    <form id="result">
+        <span style="font-size:24px;color:brown">FORM</span>       
+    </form>
+</body>
+<script>
+    let label = document.getElementById("add_label")
+    let opts = document.getElementById("add_options");
+    let optInput = document.getElementById("options");
+    let ul = document.getElementById("container");
+    let submitBtn = document.getElementById("btn");
+    let lbl = document.getElementById("lbl");
+    let result = document.getElementById("result");
+    let e = document.getElementById("adder");
+    let inTypes = document.getElementById("input-type");
+    let n = 1;
+
+    function getVal() {
+        let strUser = e.options[e.selectedIndex].value;
+        label.style.display = "block";
+
+        if(strUser == 'radio' || strUser == 'dropbox' || strUser == 'checkbox') {
+            opts.style.display = "block";
+            inTypes.style.display = "none";
+            btn.style.display = "none";
+        }
+        else if(strUser == 'input' || strUser == 'textarea') {
+            inTypes.style.display = "block";
+            opts.style.display = "none";
+            btn.style.display = "block";
+            if(strUser == 'textarea') inTypes.style.display = "none";
+        }
+    }    
+
+    function addOpt() {
+        if(optInput.value.trim() != '') {
+            let li  = document.createElement("li");
+            li.innerHTML = optInput.value;
+            ul.appendChild(li);
+            optInput.value = '';
+            btn.style.display = "block";
+        }
+    }
+
+    function addElem() {
+        let strUser = e.options[e.selectedIndex].value;
+        if(lbl.value.trim() != '') {
+            let label = document.createElement("label");
+            label.innerHTML = lbl.value;
+            lbl.value = '';
+            let div = document.createElement("div");
+            if(strUser == 'input') {                
+                let input = document.createElement("input");
+                let types = document.getElementById("types");
+                let option = types.options[types.selectedIndex].value;
+                input.setAttribute("type", option);
+                if(option != 'button') div.appendChild(label);
+                else input.setAttribute("value", label.innerHTML);
+                div.appendChild(input);               
+            } else if(strUser == 'textarea') {
+                let input = document.createElement("textarea");
+                label.setAttribute("for", strUser + n);
+                input.id = strUser + n++;
+                div.appendChild(label);
+                div.appendChild(input);
+            } else if(strUser == 'radio' || strUser == 'checkbox') {
+                let lis = ul.getElementsByTagName("li");
+                div.appendChild(label);
+                for (var index = 0; index < lis.length; index++) {
+                    var element = lis[index];
+
+                    let rBtn = document.createElement('input');
+                    rBtn.setAttribute("type", strUser);
+                    rBtn.setAttribute("value", element.innerHTML);
+                    rBtn.setAttribute("name", strUser + n);
+                    rBtn.setAttribute("checked", "checked");
+                    rBtn.id = index + element.innerHTML;
+                    div.appendChild(rBtn); 
+
+                    let rLbl = document.createElement('label');
+                    rLbl.innerHTML = element.innerHTML;
+                    rLbl.setAttribute("for", index + element.innerHTML)
+                    div.appendChild(rLbl);         
+                }
+                ul.innerHTML = '';
+                n++;
+            } else {
+                let lis = ul.getElementsByTagName("li");                
+                let select = document.createElement("select");
+                div.appendChild(label);
+                for (var index = 0; index < lis.length; index++) {
+                    var element = lis[index];
+
+                    let rBtn = document.createElement('option');
+                    rBtn.innerHTML =  element.innerHTML;
+                    rBtn.setAttribute("name", strUser + n);
+                    select.appendChild(rBtn);       
+                }
+                ul.innerHTML = '';
+                n++;
+                div.appendChild(select);
+            }
+            result.appendChild(div);
+        }
+    }
+
+</script>
+</html>
+
+<!-- //endterm wednesday -->

@@ -1,0 +1,35 @@
+transform-style: preserve-3d;
+transform: perspective(100px); /*depth*/
+translate-3d: x y z;
+
+/* div-1 verically */
+transform: rotate 3d(x, y, z, deg) /*95, 45, 0, 90 -- 2, 1, 0, 90*/
+
+
+/* div-2 horizontal */
+transform-origin: y x;
+
+transition: property duration timing-function delay;
+transition: left 300ms;
+
+animation: aName time function infinite;
+
+@keyframes aName {
+    0% {
+        top: 0;
+        left: 0;
+    }
+    50% {
+        left: 100%;
+    }
+    100% {
+        left: 0;
+    }
+
+    from {
+
+    }
+    to {
+        
+    }
+}
